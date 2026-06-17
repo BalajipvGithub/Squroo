@@ -1,4 +1,5 @@
 import { Star, ShoppingCart } from "lucide-react";
+import ProductScene from "./ProductScene";
 
 export default function ProductCard({ product, onAddToCart }) {
   const discount = Math.round(
@@ -9,11 +10,12 @@ export default function ProductCard({ product, onAddToCart }) {
     <div className="product-card">
       {product.badge && <span className="product-badge">{product.badge}</span>}
       <div className="product-img-wrap">
-        <img src={product.image} alt={product.name} loading="lazy" />
+        <ProductScene theme={product.theme} />
       </div>
       <div className="product-info">
-        <p className="product-category">{product.category}</p>
+        <p className="product-category">{product.category} · {product.ageGroup}</p>
         <h3 className="product-name">{product.name}</h3>
+        <p className="product-tagline">{product.tagline}</p>
         <div className="product-rating">
           <Star size={14} fill="#f59e0b" stroke="#f59e0b" />
           <span>{product.rating}</span>

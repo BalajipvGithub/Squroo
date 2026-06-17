@@ -3,16 +3,21 @@ export default function Footer() {
     <footer className="footer">
       <div className="footer-grid">
         <div>
-          <h3 className="footer-logo"><span className="logo-sq">Sq</span>uroo</h3>
-          <p>Your one-stop shop for everything you need, delivered fast across India.</p>
+          <h3 className="footer-logo">
+            <span className="logo-sq">Sq</span>uroo
+          </h3>
+          <p>
+            Chota Farm Kits & Chota Kitchen Kit — hands-on toys that turn screen
+            time into grow time. Every Mom to Farm, by one Toy.
+          </p>
         </div>
         <div>
-          <h4>Quick Links</h4>
+          <h4>Shop</h4>
           <ul>
-            <li><a href="#">About Us</a></li>
-            <li><a href="#">Careers</a></li>
-            <li><a href="#">Press</a></li>
-            <li><a href="#">Blog</a></li>
+            <li><a href="#shop">Farm Kits</a></li>
+            <li><a href="#shop">Kitchen Kits</a></li>
+            <li><a href="#shop">Gifts</a></li>
+            <li><a href="#shop">Custom Kits</a></li>
           </ul>
         </div>
         <div>

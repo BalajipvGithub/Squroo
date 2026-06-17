@@ -1,6 +1,7 @@
 import { useState } from "react";
 import Navbar from "./components/Navbar";
 import Hero from "./components/Hero";
+import Features from "./components/Features";
 import ProductGrid from "./components/ProductGrid";
 import CartDrawer from "./components/CartDrawer";
 import Footer from "./components/Footer";
@@ -10,6 +11,8 @@ import "./App.css";
 export default function App() {
   const [cart, setCart] = useState([]);
   const [cartOpen, setCartOpen] = useState(false);
+  const [activeCategory, setActiveCategory] = useState("All");
+  const [searchTerm, setSearchTerm] = useState("");
 
   const addToCart = (product) => {
     setCart((prev) => {
@@ -28,14 +31,40 @@ export default function App() {
     setCart((prev) => prev.filter((i) => i.id !== id));
   };
 
+  const scrollToId = (id) => {
+    document.getElementById(id)?.scrollIntoView({ behavior: "smooth", block: "start" });
+  };
+
+  const goToCategory = (cat) => {
+    setActiveCategory(cat);
+    setSearchTerm("");
+    scrollToId("shop");
+  };
+
   const cartCount = cart.reduce((s, i) => s + i.qty, 0);
 
   return (
     <>
-      <Navbar cartCount={cartCount} onCartClick={() => setCartOpen(true)} />
+      <Navbar
+        cartCount={cartCount}
+        onCartClick={() => setCartOpen(true)}
+        searchTerm={searchTerm}
+        onSearchChange={(term) => {
+          setSearchTerm(term);
+          setActiveCategory("All");
+        }}
+        onCategorySelect={goToCategory}
+      />
       <main>
-        <Hero />
-        <ProductGrid products={products} onAddToCart={addToCart} />
+        <Hero onShopClick={goToCategory} onLearnMoreClick={() => scrollToId("features")} />
+        <Features />
+        <ProductGrid
+          products={products}
+          onAddToCart={addToCart}
+          activeCategory={activeCategory}
+          onCategoryChange={setActiveCategory}
+          searchTerm={searchTerm}
+        />
       </main>
       <Footer />
       {cartOpen && (
@@ -43,6 +72,7 @@ export default function App() {
           cart={cart}
           onClose={() => setCartOpen(false)}
           onRemove={removeFromCart}
+          onClearCart={() => setCart([])}
         />
       )}
     </>
